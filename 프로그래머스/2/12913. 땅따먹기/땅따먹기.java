@@ -1,6 +1,7 @@
 class Solution {
 
 	int solution(int[][] land) {
+		int answer = 0;
 		int rows = land.length;
 		int cols = land[0].length;
 		int[][] dp = new int[rows][cols];
@@ -10,10 +11,11 @@ class Solution {
 		for (int x = 1; x < rows; x++) {
 			for (int y = 0; y < cols; y++) {
 				dp[x][y] = land[x][y] + calcMax(dp, x - 1, cols, y);
+				answer = Math.max(answer, dp[x][y]);
 			}
 		}
 
-		return calcMax(dp, rows - 1, cols, -1);
+		return answer;
 	}
 
 	private void init(int[][] land, int[][] dp, int cols) {
