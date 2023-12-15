@@ -9,7 +9,7 @@ class Solution {
 		}
 
 		while (answer.length() != t) {
-			String converted = convertTo(num++, n);
+			String converted = Integer.toString(num++, n);
 			for (char c : converted.toCharArray()) {
 				if (order++ % m == p) {
 					answer.append(c);
@@ -19,21 +19,6 @@ class Solution {
 				}
 			}
 		}
-		return answer.toString();
-	}
-
-	private String convertTo(int num, int n) {
-		StringBuilder stringBuilder = new StringBuilder();
-		char[] c = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
-		if (num == 0) {
-			return "0";
-		}
-
-		while (num > 0) {
-			stringBuilder.insert(0, c[num % n]);
-			num /= n;
-		}
-		return stringBuilder.toString();
+		return answer.toString().toUpperCase();
 	}
 }
