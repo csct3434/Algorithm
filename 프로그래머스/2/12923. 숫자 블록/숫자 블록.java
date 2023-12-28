@@ -1,30 +1,26 @@
 class Solution {
 
     public int[] solution(long b, long e) {
-        int begin = Math.toIntExact(b);
-        int end = Math.toIntExact(e);
+        int[] answer = new int[(int) (e - b + 1)];
 
-        int[] answer = new int[end - begin + 1];
-        int number = begin;
+        for (int i = 0; i < answer.length; i++) {
+            int number = (int) b + i;
 
-        if (begin == 1) {
-            answer[0] = 0;
-            number = 2;
-        }
-
-        for (; number <= end; number++) {
-            int index = number - begin;
-
-            answer[index] = 1;
+            answer[i] = 1;
             for (int div = 2; div <= Math.sqrt(number); div++) {
-                if(number % div == 0) {
-                    answer[index] = div;
+                if (number % div == 0) {
+                    answer[i] = div;
+
                     if (number / div <= 10000000) {
-                        answer[index] = number / div;
+                        answer[i] = number / div;
                         break;
                     }
                 }
             }
+        }
+
+        if (b == 1) {
+            answer[0] = 0;
         }
 
         return answer;
