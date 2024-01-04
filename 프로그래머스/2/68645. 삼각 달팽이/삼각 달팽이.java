@@ -7,29 +7,16 @@ class Solution {
 
         int row = -1, col = 0, count = 0;
         while (count < total) {
-
-            while (true) {
-                if (row + 1 < n && array[row + 1][col] == 0) {
-                    array[++row][col] = ++count;
-                    continue;
-                }
-                break;
+            while (row + 1 < n && array[row + 1][col] == 0) {
+                array[++row][col] = ++count;
             }
 
-            while (true) {
-                if (col + 1 < n && array[row][col + 1] == 0) {
-                    array[row][++col] = ++count;
-                    continue;
-                }
-                break;
+            while (col + 1 < n && array[row][col + 1] == 0) {
+                array[row][++col] = ++count;
             }
 
-            while (true) {
-                if ((row - 1 >= 0 && col - 1 >= 0) && array[row - 1][col - 1] == 0) {
-                    array[--row][--col] = ++count;
-                    continue;
-                }
-                break;
+            while ((row - 1 >= 0 && col - 1 >= 0) && array[row - 1][col - 1] == 0) {
+                array[--row][--col] = ++count;
             }
         }
 
