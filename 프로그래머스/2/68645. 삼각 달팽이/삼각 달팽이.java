@@ -2,27 +2,35 @@ class Solution {
 
     public int[] solution(int n) {
         int total = n * (1 + n) / 2;
-        int[] answer = new int[n * (1 + n) / 2];
         int[][] array = new int[n][n];
+        int[] answer = new int[n * (1 + n) / 2];
 
-        int row = 0, col = 0, count = 1, repeat = 0;
-        while (count <= total) {
-            for (; row < n - repeat; row++) {
-                array[row][col] = count++;
-            }
-            row--;
+        int row = -1, col = 0, count = 0;
+        while (count < total) {
 
-            col++;
-            for (; col <= row - repeat; col++) {
-                array[row][col] += count++;
+            while (true) {
+                if (row + 1 < n && array[row + 1][col] == 0) {
+                    array[++row][col] = ++count;
+                    continue;
+                }
+                break;
             }
-            col--;
 
-            while (row - 1 >= 1 + repeat * 2) {
-                array[--row][--col] += count++;
+            while (true) {
+                if (col + 1 < n && array[row][col + 1] == 0) {
+                    array[row][++col] = ++count;
+                    continue;
+                }
+                break;
             }
-            row++;
-            repeat++;
+
+            while (true) {
+                if ((row - 1 >= 0 && col - 1 >= 0) && array[row - 1][col - 1] == 0) {
+                    array[--row][--col] = ++count;
+                    continue;
+                }
+                break;
+            }
         }
 
         count = 0;
