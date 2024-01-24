@@ -16,7 +16,6 @@ class Solution {
 
         for (String subset : subsets) {
             String nextNumber = Arrays.stream(subset.substring(1, subset.length() - 1).split(","))
-                .parallel()
                 .filter(number -> !used.contains(number))
                 .findFirst()
                 .orElse("0");
