@@ -15,12 +15,8 @@ class Solution {
         Stack<Integer> subContainer = new Stack<>();
 
         for (int order : orders) {
-            while (true) {
-                if (!mainContainer.isEmpty() && order > mainContainer.get(0)) {
-                    subContainer.push(mainContainer.remove(0));
-                } else {
-                    break;
-                }
+            while (!mainContainer.isEmpty() && order > mainContainer.get(0)) {
+                subContainer.push(mainContainer.remove(0));
             }
 
             if (!mainContainer.isEmpty() && order == mainContainer.get(0)) {
