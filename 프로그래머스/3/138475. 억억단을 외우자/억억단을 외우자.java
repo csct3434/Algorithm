@@ -11,13 +11,10 @@ class Solution {
             }
         }
 
-        int maxCount = count[e];
         dp[e] = e;
-
         for (int i = e - 1; i >= 1; i--) {
-            if (count[i] >= maxCount) {
+            if (count[i] >= count[dp[i + 1]]) {
                 dp[i] = i;
-                maxCount = count[i];
             } else {
                 dp[i] = dp[i + 1];
             }
