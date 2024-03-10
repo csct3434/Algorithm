@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.Map.*;
+import java.util.stream.Collectors;
 
 class Solution {
 
@@ -23,9 +24,7 @@ class Solution {
         for (Entry<String, Integer> entry : countEntries) {
             List<int[]> list = category.get(entry.getKey());
             list.sort((a, b) -> a[1] == b[1] ? a[0] - b[0] : b[1] - a[1]);
-            for (int i = 0; i < Math.min(list.size(), 2); i++) {
-                answer.add(list.get(i)[0]);
-            }
+            answer.addAll(list.stream().limit(2).map(x -> x[0]).collect(Collectors.toList()));
         }
         return answer.stream().mapToInt(i -> i).toArray();
     }
