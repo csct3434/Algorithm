@@ -9,15 +9,6 @@ class Solution {
         return answer;
     }
     
-    private String toDigit(int decimalNumber, int digit) {
-        StringBuilder result = new StringBuilder();
-        while(decimalNumber > 0) {
-            result.insert(0, decimalNumber % digit);
-            decimalNumber /= digit;
-        }
-        return result.toString();
-    }
-    
     private boolean isPrime(long n) {
         if(n == 1) return false;
         
