@@ -1,7 +1,7 @@
 class Solution {
     public int solution(int n, int k) {
         int answer = 0;
-        for(String number : toDigit(n, k).split("0")) {
+        for(String number : Integer.toString(n, k).split("0")) {
             if(!number.equals("") && isPrime(Long.valueOf(number))) {
                 answer++;
             }
