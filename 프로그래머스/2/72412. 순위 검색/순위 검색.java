@@ -8,13 +8,13 @@ class Solution {
         
         for(int i=0; i<query.length; i++) {
             int score = Integer.parseInt(query[i].substring(query[i].lastIndexOf(" ") + 1));
-            String condition = query[i].substring(0, query[i].lastIndexOf(" "));
             
-            if(conditionMap.containsKey(condition)) {
-                List<Integer> list = conditionMap.get(condition);
-                answer[i] = list.size() - binarySearch(list, score);
-            } else {
-                answer[i] = 0;
+            for(String condition : extractConditions(query[i])) {
+                condition = condition.trim();
+                if(conditionMap.containsKey(condition)) {
+                    List<Integer> list = conditionMap.get(condition);
+                    answer[i] += list.size() - binarySearch(list, score);
+                }
             }
         }
         
@@ -28,28 +28,45 @@ class Solution {
             String condition = inf.substring(0, inf.lastIndexOf(" "));
             int score = Integer.parseInt(inf.substring(inf.lastIndexOf(" ") + 1));
             
-            String[] tokens = condition.split(" ");
-            
-            for(int mask=0; mask < (1 << tokens.length); mask++) {
-                String cond = "";
-                
-                for(int i=0; i < tokens.length; i++) {
-                    if((mask & (1 << i)) > 0)   cond += tokens[i];
-                    else cond += "-";
-                    
-                    if(i < tokens.length - 1) cond += " and ";    
-                }
-                
-                if(!conditionMap.containsKey(cond)) {
-                    conditionMap.put(cond, new ArrayList<Integer>());
-                }
-                conditionMap.get(cond).add(score);
+            if(!conditionMap.containsKey(condition)) {
+                conditionMap.put(condition, new ArrayList<Integer>());
             }
+            
+            conditionMap.get(condition).add(score);
         }
-       
-        conditionMap.values().forEach(Collections::sort);
+        
+        for(List<Integer> list : conditionMap.values()) {
+            Collections.sort(list);
+        }
         
         return conditionMap;
+    }
+    
+    private static String[][] TOKENS = {{"cpp", "java", "python"}, {"backend", "frontend"}, {"junior", "senior"}, {"chicken", "pizza"}};
+    
+    private List<String> extractConditions(String query) {
+        String[] queryTokens = query.substring(0, query.lastIndexOf(" ")).split(" and ");
+        
+        List<String> conditions = new LinkedList<>();
+        conditions.add("");
+        
+        for(int i=0; i<4; i++) {
+            String queryToken = queryTokens[i];
+            
+            List<String> temp = new LinkedList<>();
+            
+            for(String condition : conditions) {
+                if(queryToken.equals("-")) {
+                    Arrays.stream(TOKENS[i]).forEach(token -> temp.add(condition + " " + token));
+                } else {
+                    temp.add(condition + " " + queryToken);
+                }
+            }
+            
+            conditions = temp;
+        }
+        
+        return conditions;
     }
     
     private int binarySearch(List<Integer> list, int key) {
