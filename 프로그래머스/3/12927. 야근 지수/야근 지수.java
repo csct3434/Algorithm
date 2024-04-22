@@ -15,11 +15,6 @@ class Solution {
             }
         }
         
-        long answer = 0;
-        while(!pq.isEmpty()) {
-            long workload = pq.poll();
-            answer += workload * workload;
-        }
-        return answer;
+        return pq.stream().mapToLong(i -> (long) i * i).sum();
     }
 }
