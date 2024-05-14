@@ -1,7 +1,7 @@
 class Solution {
 
     public int solution(String s) {
-        int answer = -1, len = s.length();
+        int answer = 1, len = s.length();
 
         for (int i=0; i < len; i++) {
             for (int j=1; i-j >= 0 && i+j < len; j++) {
@@ -22,10 +22,7 @@ class Solution {
                 }
             }
         }
-        
-        if(answer == -1) {
-            return 1;
-        }
+
         return answer;
     }
 }
