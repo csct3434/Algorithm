@@ -8,17 +8,11 @@ class Solution {
     public String[] solution(String[][] tickets) {
         Map<String, List<Ticket>> flight = new HashMap<>();
         for(String[] ticket : tickets) {
-            if(!flight.containsKey(ticket[0])) {
-                flight.put(ticket[0], new ArrayList<>());
-            }
+            if(!flight.containsKey(ticket[0])) flight.put(ticket[0], new ArrayList<>());
             flight.get(ticket[0]).add(new Ticket(ticket[1]));
         }
-        for(Entry<String, List<Ticket>> entry : flight.entrySet()) {
-            entry.getValue().sort(Comparator.comparing(a -> a.dest));
-        }
-        List<String> route = new ArrayList<>();
-        route.add("ICN");
-        dfs(flight, tickets.length + 1, route);
+        flight.forEach((key, value) -> value.sort(Comparator.comparing(a -> a.dest)));
+        dfs(flight, tickets.length + 1, new ArrayList<>(List.of("ICN")));
         return answer;
     }
 
