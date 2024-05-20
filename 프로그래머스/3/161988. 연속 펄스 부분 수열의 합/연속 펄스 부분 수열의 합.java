@@ -1,7 +1,5 @@
 class Solution {
-    
-    private static final long[] P = new long[]{1, -1};
-    
+        
     public long solution(int[] sequence) {
         long[] dp = new long[]{sequence[0], -sequence[0]};
         long answer = Math.max(dp[0], dp[1]);
