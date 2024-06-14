@@ -11,12 +11,10 @@ class Solution {
         for(int i=1; i<m; i++) {
             for(int j=1; j<n; j++) {
                 if(cityMap[i][j] == BLOCKED) continue;
-                dp[i][j][0] += dp[i-1][j][0];
-                if(cityMap[i-1][j] != STRAIGHT_ONLY) dp[i][j][0] += dp[i-1][j][1];
-                dp[i][j][1] += dp[i][j-1][1];
-                if(cityMap[i][j-1] != STRAIGHT_ONLY) dp[i][j][1] += dp[i][j-1][0];
-                dp[i][j][0] %= MOD;
-                dp[i][j][1] %= MOD;
+                dp[i][j][0] = dp[i-1][j][0];
+                dp[i][j][1] = dp[i][j-1][1];
+                if(cityMap[i-1][j] != STRAIGHT_ONLY) dp[i][j][0] = (dp[i][j][0] + dp[i-1][j][1]) % MOD;
+                if(cityMap[i][j-1] != STRAIGHT_ONLY) dp[i][j][1] = (dp[i][j][1] + dp[i][j-1][0]) % MOD;
             }
         }
         return (dp[m-1][n-1][0] + dp[m-1][n-1][1]) % MOD;
