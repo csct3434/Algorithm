@@ -7,23 +7,16 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N, K;
-        long size;
-        N = sc.nextInt();
-        K = sc.nextInt();
-        size = sc.nextLong();
+        int N = sc.nextInt(), K = sc.nextInt();
+        long size = sc.nextLong();
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
             list.add(sc.nextInt());
         }
         list.sort(Comparator.comparingInt(a -> a));
-
         for (int i = 0; i < K; i++) {
             int idx = binarySearch(list, size);
-            if(idx == -1) {
-                System.out.println(size);
-                return;
-            }
+            if(idx == -1) break;
             size += list.remove(idx);
         }
         System.out.println(size);
@@ -40,5 +33,4 @@ public class Main {
         if(list.get(l) >= size) return l-1;
         return l;
     }
-
 }
