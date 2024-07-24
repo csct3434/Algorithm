@@ -1,5 +1,5 @@
 class Solution {
     public boolean solution(String s) {
-        return s.matches("^[0-9]{4}$") || s.matches("^\\d{6}$");
+        return s.matches("\\d{4}|\\d{6}");
     }
 }
