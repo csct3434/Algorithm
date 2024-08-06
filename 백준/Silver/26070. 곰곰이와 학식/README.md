@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 14356 KB, 시간: 104 ms
+메모리: 14344 KB, 시간: 104 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 8월 7일 01:02:48
+2024년 8월 7일 01:17:23
 
 ### 문제 설명
 
@@ -32,7 +32,7 @@
 
 <p>굶주린 곰곰이들을 위해, 식권과 이벤트를 적절히 활용했을 때 배불리 먹일 수 있는 곰곰이의 최대 마릿수를 구해주자.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="max-height: 340px; object-fit:contain; display:inline-block;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/ca0daab3-8442-4e37-93c0-b6cd88ed4dc6/-/preview/" style="max-height: 340px; object-fit:contain; display:inline-block;"></p>
 
 ### 입력 
 

@@ -18,22 +18,11 @@ public class Main {
             ticket[i] = Integer.parseInt(st.nextToken());
         }
         for (int i = 0; i < 3; i++) {
-            int m = Math.min(people[i], ticket[i]);
-            people[i] -= m;
-            ticket[i] -= m;
-        }
-        for (int i = 0; i < 3; i++) {
-            if (people[i] == 0 && people[(i + 4) % 3] > 0) {
-                int m = Math.min(people[(i + 4) % 3], ticket[i] / 3);
-                people[(i + 4) % 3] -= m;
-                ticket[i] -= m * 3;
-            }
-        }
-        for (int i = 0; i < 3; i++) {
-            if (people[i] == 0 && people[(i + 5) % 3] > 0) {
-                int m = Math.min(people[(i + 5) % 3], ticket[i] / 9);
-                people[(i + 5) % 3] -= m;
-                ticket[i] -= m * 9;
+            for (int j = 0; j < 3; j++) {
+                int pIdx = (j + 3 + i) % 3, weight = (int) Math.pow(3, i);
+                int m = Math.min(people[pIdx], ticket[j] / weight);
+                people[pIdx] -= m;
+                ticket[j] -= m * weight;
             }
         }
         System.out.println(IntStream.range(0, 3).mapToLong(i -> total[i] - people[i]).sum());
