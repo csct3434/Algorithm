@@ -1,26 +1,29 @@
 import java.util.Scanner;
 
 public class Main {
+
+    private static int N;
+    private static final StringBuilder answer = new StringBuilder();
+
     public static void main(String[] args) {
-        StringBuilder answer = new StringBuilder();
-        int N = new Scanner(System.in).nextInt();
-        for (int n : new int[]{2, 3, 5, 7}) {
-            int start = n * (int) Math.pow(10, N-1);
-            int end = (n+1) * (int) Math.pow(10, N-1);
-            for (int num = start; num < end; num++) {
-                int d = (int) Math.pow(10, N - 1);
-                boolean prime = true;
-                while (d > 0) {
-                    if (!isPrime(num / d)) {
-                        prime = false;
-                        break;
-                    }
-                    d /= 10;
-                }
-                if (prime) answer.append(num).append("\n");
+        N = new Scanner(System.in).nextInt();
+        for (int startNumber : new int[]{2, 3, 5, 7}) {
+            dfs(1, startNumber);
+        }
+        System.out.println(answer);
+    }
+
+    private static void dfs(int depth, int num) {
+        if (depth == N) {
+            answer.append(num).append("\n");
+            return;
+        }
+        int nextNumber;
+        for (int digit = 0; digit <= 9; digit++) {
+            if (isPrime(nextNumber = num * 10 + digit)) {
+                dfs(depth + 1, nextNumber);
             }
         }
-        System.out.print(answer);
     }
 
     private static boolean isPrime(int num) {
