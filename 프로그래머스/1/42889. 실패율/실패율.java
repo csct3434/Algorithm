@@ -18,7 +18,7 @@ class Solution {
                 return -1;
             }
             if((long) a[1] * b[2] == (long) b[1] * a[2]) return a[0] - b[0];
-            return (long) b[1] * a[2] - (long) a[1] * b[2] < 0 ? -1 : 1;
+            return (long) a[1] * b[2] > (long) b[1] * a[2] ? -1 : 1;
         });
         int[] answer = new int[N];
         for(int i=0; i<N; i++) {
