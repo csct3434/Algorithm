@@ -1,11 +1,10 @@
+import java.util.*;
 import java.util.stream.*;
 
 class Solution {
     public String solution(String s) {
-        return s.chars()
-                .mapToObj(c -> (char) c)
-                .sorted((c1, c2) -> c2 - c1)
-                .map(String::valueOf)
+        return Stream.of(s.split(""))
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.joining());
     }
 }
