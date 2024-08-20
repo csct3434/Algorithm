@@ -5,10 +5,9 @@ class Solution {
         while(++idx < s.length()) {
             if( (count += s.charAt(idx) != c ? -1 : 1) == 0 ) {
                 if(idx == s.length() - 1) break;
-                idx++;
                 count = 1;
+                c = s.charAt(++idx);
                 answer++;
-                if(idx < s.length()) c = s.charAt(idx);
             }
         }
         return answer;
