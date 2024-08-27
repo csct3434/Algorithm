@@ -14,7 +14,7 @@ class Solution {
             answer[idx] = answer[idx - 1];
             answer[idx - 1] = temp;
             rank.put(answer[idx], idx);
-            rank.put(answer[idx - 1], idx - 1);
+            rank.put(answer[idx-1], idx-1);
         }
         return answer;
     }
