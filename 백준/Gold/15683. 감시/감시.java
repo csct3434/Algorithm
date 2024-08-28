@@ -14,11 +14,11 @@ class Main {
     private static final int COVERED = 12345;
     private static final int[][][][] rangeInfo = {
             {},
-            { {{0, RIGHT}}, {{DOWN, 0}}, {{0, LEFT}}, {{UP, 0}} },
-            {{{0, RIGHT}, {0, LEFT}}, {{UP, 0}, {DOWN, 0}}, {{0, RIGHT}, {0, LEFT}}, {{UP, 0}, {DOWN, 0}}},
+            {{{0, RIGHT}}, {{DOWN, 0}}, {{0, LEFT}}, {{UP, 0}}},
+            {{{0, RIGHT}, {0, LEFT}}, {{UP, 0}, {DOWN, 0}}},
             {{{UP, 0}, {0, RIGHT}}, {{0, RIGHT}, {DOWN, 0}}, {{DOWN, 0}, {0, LEFT}}, {{0, LEFT}, {UP, 0}}},
-            { {{0, LEFT}, {UP, 0}, {0, RIGHT}}, {{UP, 0}, {0, RIGHT}, {DOWN, 0}}, {{0, RIGHT}, {DOWN, 0}, {0, LEFT}}, {{DOWN, 0}, {0, LEFT}, {UP, 0}}},
-            {{{UP, 0}, {0, RIGHT}, {DOWN, 0}, {0, LEFT}}, {{UP, 0}, {0, RIGHT}, {DOWN, 0}, {0, LEFT}}, {{UP, 0}, {0, RIGHT}, {DOWN, 0}, {0, LEFT}}, {{UP, 0}, {0, RIGHT}, {DOWN, 0}, {0, LEFT}}}
+            {{{0, LEFT}, {UP, 0}, {0, RIGHT}}, {{UP, 0}, {0, RIGHT}, {DOWN, 0}}, {{0, RIGHT}, {DOWN, 0}, {0, LEFT}}, {{DOWN, 0}, {0, LEFT}, {UP, 0}}},
+            {{{UP, 0}, {0, RIGHT}, {DOWN, 0}, {0, LEFT}}}
     };
 
     public static void main(String[] args) throws IOException {
@@ -55,7 +55,7 @@ class Main {
             return;
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < rangeInfo[cctvInfos.get(depth)[0]].length; i++) {
             rotationInfo[depth] = i;
             dfs(depth + 1, rotationInfo);
         }
@@ -66,7 +66,7 @@ class Main {
         for (int i = 0; i < N; i++) {
             markedOffice[i] = office[i].clone();
         }
-        for(int i=0; i<cctvCount; i++) {
+        for (int i = 0; i < cctvCount; i++) {
             int[] cctvInfo = cctvInfos.get(i);
             int cctvType = cctvInfo[0];
             int x = cctvInfo[1];
