@@ -7,18 +7,18 @@ import java.util.StringTokenizer;
 
 class Main {
 
-    private static final int UP = -1, DOWN = 1, RIGHT = 1, LEFT = -1;
+    private static final int[] UP = {-1, 0}, DOWN = {1, 0}, RIGHT = {0, 1}, LEFT = {0, -1};
     private static int cctvCount, N, M, answer = Integer.MAX_VALUE;
     private static List<int[]> cctvInfos;
     private static int[][] office;
     private static final int COVERED = 12345;
     private static final int[][][][] rangeInfo = {
             {},
-            {{{0, RIGHT}}, {{DOWN, 0}}, {{0, LEFT}}, {{UP, 0}}},
-            {{{0, RIGHT}, {0, LEFT}}, {{UP, 0}, {DOWN, 0}}},
-            {{{UP, 0}, {0, RIGHT}}, {{0, RIGHT}, {DOWN, 0}}, {{DOWN, 0}, {0, LEFT}}, {{0, LEFT}, {UP, 0}}},
-            {{{0, LEFT}, {UP, 0}, {0, RIGHT}}, {{UP, 0}, {0, RIGHT}, {DOWN, 0}}, {{0, RIGHT}, {DOWN, 0}, {0, LEFT}}, {{DOWN, 0}, {0, LEFT}, {UP, 0}}},
-            {{{UP, 0}, {0, RIGHT}, {DOWN, 0}, {0, LEFT}}}
+            {{RIGHT}, {DOWN}, {LEFT}, {UP}},
+            {{RIGHT, LEFT}, {UP, DOWN}},
+            {{UP, RIGHT}, {RIGHT, DOWN}, {DOWN, LEFT}, {LEFT, UP}},
+            {{LEFT, UP, RIGHT}, {UP, RIGHT, DOWN}, {RIGHT, DOWN, LEFT}, {DOWN, LEFT, UP}},
+            {{UP, RIGHT, DOWN, LEFT}}
     };
 
     public static void main(String[] args) throws IOException {
@@ -71,10 +71,10 @@ class Main {
             int cctvType = cctvInfo[0];
             int x = cctvInfo[1];
             int y = cctvInfo[2];
-            int[][] dxdys = rangeInfo[cctvType][rotationInfo[i]];
-            for (int j = 0; j < dxdys.length; j++) {
-                int dx = dxdys[j][0];
-                int dy = dxdys[j][1];
+            int[][] dxdy = rangeInfo[cctvType][rotationInfo[i]];
+            for (int j = 0; j < dxdy.length; j++) {
+                int dx = dxdy[j][0];
+                int dy = dxdy[j][1];
                 int nx = x, ny = y;
                 while (true) {
                     nx += dx;
