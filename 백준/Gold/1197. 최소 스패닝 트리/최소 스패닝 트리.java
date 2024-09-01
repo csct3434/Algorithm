@@ -21,15 +21,11 @@ public class Main {
             pq.add(new int[]{Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())});
         }
         Arrays.fill(parent, -1);
-        int answer = 0, connection = 0, p1, p2;
-        while (!pq.isEmpty()) {
+        int answer = 0;
+        while (-parent[find(1)] != V) {
             int[] info = pq.remove();
-            p1 = find(info[0]);
-            p2 = find(info[1]);
-            if (p1 == p2) continue;
+            if (!union(info[0], info[1])) continue;
             answer += info[2];
-            union(p1, p2);
-            if (++connection == V - 1) break;
         }
         System.out.print(answer);
     }
@@ -39,16 +35,17 @@ public class Main {
         return parent[v] = find(parent[v]);
     }
 
-    private static void union(int v1, int v2) {
+    private static boolean union(int v1, int v2) {
         int p1 = find(v1);
         int p2 = find(v2);
-        if (p1 == p2) return;
+        if (p1 == p2) return false;
         if (parent[p1] < parent[p2]) {
             parent[p1] += parent[p2];
             parent[p2] = p1;
         } else {
-            parent[p2] = parent[p1];
+            parent[p2] += parent[p1];
             parent[p1] = p2;
         }
+        return true;
     }
 }
