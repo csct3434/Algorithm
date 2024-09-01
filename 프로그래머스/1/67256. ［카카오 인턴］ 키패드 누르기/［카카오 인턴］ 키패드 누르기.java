@@ -28,9 +28,7 @@ class Solution {
     
     private int[] resolveHand(int[] left, int[] right, int targetNumber, boolean rightHanded) {
         int lDiff = Math.abs(left[0] - targetNumber / 3) + Math.abs(left[1] - targetNumber % 3);
-        
         int rDiff = Math.abs(right[0] - targetNumber / 3) + Math.abs(right[1] - targetNumber % 3);
-        
         if(lDiff == rDiff) return rightHanded? right : left;
         return lDiff < rDiff ? left : right;
     }
