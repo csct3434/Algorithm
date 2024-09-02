@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-// 다익스트라 알고리즘
 public class Main {
 
     private static final int INF = 987654321;
@@ -12,7 +11,6 @@ public class Main {
     private static int[][] plain, dp;
 
     public static void main(String[] args) throws IOException {
-        StringBuilder answer = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         N = Integer.parseInt(br.readLine());
