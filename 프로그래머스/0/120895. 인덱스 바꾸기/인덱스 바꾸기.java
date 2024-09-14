@@ -1,9 +1,8 @@
 class Solution {
     public String solution(String my_string, int num1, int num2) {
-        StringBuilder sb = new StringBuilder(my_string);
-        char c = sb.charAt(num1);
-        sb.setCharAt(num1, sb.charAt(num2));
-        sb.setCharAt(num2, c);
-        return sb.toString();
+        char[] c = my_string.toCharArray();
+        c[num1] = my_string.charAt(num2);
+        c[num2] = my_string.charAt(num1);
+        return new String(c);
     }
 }
