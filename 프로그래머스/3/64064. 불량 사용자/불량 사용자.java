@@ -14,10 +14,9 @@ class Solution {
             bannedMasks.add(bannedMask);
             return;
         }
-
+        
         for(int i=0; i<user_id.length; i++) {
-            if((bannedMask & (1 << i)) > 0) continue;
-            if(check(user_id[i], banned_id[depth]))  {
+            if(((bannedMask & (1 << i)) == 0) && check(user_id[i], banned_id[depth])) {
                 dfs(depth + 1, user_id, banned_id, (bannedMask | (1 << i)));
             }
         }
@@ -26,8 +25,7 @@ class Solution {
     private boolean check(String userId, String bannedId) {
         if(userId.length() != bannedId.length()) return false;
         for(int i=0; i<userId.length(); i++) {
-            if(bannedId.charAt(i) == '*') continue;
-            if(userId.charAt(i) != bannedId.charAt(i)) return false;
+            if(bannedId.charAt(i) != '*' && userId.charAt(i) != bannedId.charAt(i)) return false;
         }
         return true;
     }
