@@ -1,44 +1,33 @@
 import java.util.*;
 
 class Solution {
-    
+
+    private final Set<Integer> bannedMasks = new HashSet<>();
+
     public int solution(String[] user_id, String[] banned_id) {
-        List<List<Integer>> matched_id = new ArrayList<>();
-        
-        for(String pattern : banned_id) {
-            List<Integer> temp = new ArrayList<>();
-            for(int i=0; i<user_id.length; i++) {
-                if(matches(user_id[i], pattern)) {
-                    temp.add(i);
-                }
-            }
-            matched_id.add(temp);
-        }
-        
-        Set<Integer> masks = new HashSet<>();
-        masks.add(0);
-        
-        for(List<Integer> ids : matched_id) {
-            Set<Integer> temp = new HashSet<>();
-            for(int mask : masks) {
-                for(int id : ids) {
-                    if((mask & (1 << id)) == 0) {
-                        temp.add(mask | (1 << id));
-                    }
-                }
-            }
-            masks = temp;
-        }
-        
-        return masks.size();
+        dfs(0, user_id, banned_id, 0);
+        return bannedMasks.size();
     }
-    
-    private boolean matches(String id, String pattern) {
-        if(id.length() != pattern.length()) return false;
-        for(int i=0, len = id.length(); i<len; i++) {
-            if(pattern.charAt(i) != '*' && id.charAt(i) != pattern.charAt(i)) {
-                return false;
+
+    private void dfs(int depth, String[] user_id, String[] banned_id, int bannedMask) {
+        if(depth == banned_id.length) {
+            bannedMasks.add(bannedMask);
+            return;
+        }
+
+        for(int i=0; i<user_id.length; i++) {
+            if((bannedMask & (1 << i)) > 0) continue;
+            if(check(user_id[i], banned_id[depth]))  {
+                dfs(depth + 1, user_id, banned_id, (bannedMask | (1 << i)));
             }
+        }
+    }
+
+    private boolean check(String userId, String bannedId) {
+        if(userId.length() != bannedId.length()) return false;
+        for(int i=0; i<userId.length(); i++) {
+            if(bannedId.charAt(i) == '*') continue;
+            if(userId.charAt(i) != bannedId.charAt(i)) return false;
         }
         return true;
     }
