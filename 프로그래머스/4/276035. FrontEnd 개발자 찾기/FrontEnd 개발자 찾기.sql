@@ -1,0 +1,18 @@
+SELECT
+    ID,
+    EMAIL,
+    FIRST_NAME,
+    LAST_NAME
+FROM
+    DEVELOPERS d1
+JOIN (
+    SELECT
+        DISTINCT ID
+    FROM
+        DEVELOPERS d2, SKILLCODES s
+    WHERE
+        d2.SKILL_CODE & s.CODE > 0
+        AND s.CATEGORY = 'Front End'
+) t USING (ID)
+ORDER BY
+    ID ASC
