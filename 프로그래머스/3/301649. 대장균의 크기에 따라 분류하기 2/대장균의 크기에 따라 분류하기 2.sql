@@ -1,0 +1,20 @@
+SELECT
+    e.ID,
+    CASE
+        WHEN r.RANKING <= r.TOTAL * 0.25 THEN 'CRITICAL'
+        WHEN r.RANKING <= r.TOTAL * 0.50 THEN 'HIGH'
+        WHEN r.RANKING <= r.TOTAL * 0.75 THEN 'MEDIUM'
+        ELSE 'LOW'
+    END AS COLONY_NAME
+FROM
+    ECOLI_DATA e
+JOIN (
+    SELECT
+        ID,
+        ROW_NUMBER() OVER (ORDER BY SIZE_OF_COLONY DESC) AS RANKING,
+        COUNT(*) OVER() AS TOTAL
+    FROM
+        ECOLI_DATA
+) AS r USING (ID)
+ORDER BY
+    e.ID ASC
